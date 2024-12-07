@@ -1,74 +1,49 @@
-# Digit-Classification-using-MLP
+# Multi-layer Perceptrons - Digit Classification
 
-This project involves performing digit classification using a Multi-layer Perceptron (MLP). The MLPClassifier from sklearn is used to train the model and evaluate its performance on the provided datasets.
-Dataset
+## **Project Overview**
+In this project, we perform digit classification using a Multi-layer Perceptron (MLP) model. The dataset consists of images representing digits, and the goal is to predict the corresponding digit for each image. We utilize the `MLPClassifier` from `sklearn` to train and evaluate the model's performance on the given dataset.
 
-The dataset contains images of digits for training and testing purposes. The images are in grayscale and the task is to classify each image into one of the 10 digit classes (0-9). The datasets can be downloaded from here.
-Steps to Complete the Project
-1. Load Dataset
+## **Dataset**
+The dataset consists of three parts:
+- **training_3digits.hdf5**: Contains training images and their corresponding digit labels.
+- **testing_3digits_part1.hdf5**: The first part of the testing dataset.
+- **testing_3digits_part2.hdf5**: The second part of the testing dataset.
 
-    Data Loading: Load the training and test sets from the provided files. Ensure the data is in a format suitable for training the MLP model.
+### **Number of Images**
+- **Training set**: 2726 images
+- **Testing set 1**: 3147 images
+- **Testing set 2**: 3147 images
 
-2. Train MLP Model
+## **Setup**
+To run the project, you need the following Python packages:
+- `numpy`
+- `h5py`
+- `matplotlib`
+- `sklearn`
 
-    Model Training: Use the MLPClassifier from sklearn to train the model on the training set.
-    Hyperparameter Tuning: Explore different hyperparameters (e.g., number of hidden layers, number of neurons, activation functions) to optimize model performance.
+### **Loading the Dataset**
+The dataset is loaded from `.hdf5` files. Below is an example of how the dataset is loaded and processed.
 
-3. Evaluate Model
+```python
+import numpy as np
+import h5py
 
-    Accuracy: Report the accuracy of the model on the test sets.
-    Other Metrics: Evaluate other interesting metrics such as precision, recall, F1 score, and confusion matrix.
-    Observations: Report any interesting observations based on the evaluation metrics.
+# Load the training data
+filename = "training_3digits.hdf5"
+train = h5py.File(filename,'r')
+train_images = np.array(train['images'])
+train_digits = np.array(train['digits'])
+train.close()
 
-Prerequisites
+# Load the testing data
+filename = "testing_3digits_part1.hdf5"
+test1 = h5py.File(filename,'r')
+test_images_1 = np.array(test1['images'])
+test_digits_1 = np.array(test1['digits'])
+test1.close()
 
-    Python 3.x
-    Required Libraries: numpy, pandas, scikit-learn, matplotlib
-
-Instructions
-
-    Clone the Repository:
-
-    sh
-
-git clone <repository_url>
-cd <repository_directory>
-
-Install Dependencies:
-
-sh
-
-pip install -r requirements.txt
-
-Download Dataset:
-
-    Download the training and test datasets from the provided link and place them in the data directory.
-
-Run Data Loading and Preprocessing:
-
-    Load and preprocess the dataset.
-
-sh
-
-python data_preprocessing.py
-
-Train MLP Model:
-
-    Train the MLP model using the training set.
-
-sh
-
-python train_mlp.py
-
-Evaluate Model:
-
-    Evaluate the model's performance on the test sets and report accuracy and other metrics.
-
-sh
-
-python evaluate_model.py
-
-
-Conclusion
-
-This project demonstrates the implementation of a digit classification system using Multi-layer Perceptrons (MLP). By training and evaluating the MLP model on the provided datasets, we can classify digit images with high accuracy.
+filename = "testing_3digits_part2.hdf5"
+test2 = h5py.File(filename,'r')
+test_images_2 = np.array(test2['images'])
+test_digits_2 = np.array(test2['digits'])
+test2.close()
